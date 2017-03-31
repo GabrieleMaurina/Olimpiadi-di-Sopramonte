@@ -23,3 +23,19 @@ for (id, name, min, max) in cursor:
 cnx.close()
 
 print("after")
+
+
+
+
+
+#function pointer example
+functionPointer = None
+
+
+def simple_function():
+    print("Hello World!")
+
+
+functionPointer = simple_function
+
+functionPointer()
