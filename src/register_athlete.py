@@ -1,11 +1,12 @@
 from tkinter import *
 #Author: Pomo
 
-class RegisterAthlete:
+class RegisterAthlete(Frame):
 	def __init__(self, parent):
-		self.nome = ""
-		self.cognome = ""
-		self.nascita = ""
+		Frame.__init__(parent)
+		self.name = ""
+		self.surname = ""
+		self.birth = ""
 		self.gender = ""
 			#frame esterno che contiene tutto
 		self.container = Frame(parent) 
@@ -60,21 +61,21 @@ class RegisterAthlete:
 		self.confirm_button.pack()
 
 	def conferma(self, event):
-		errore = ""
-		self.nome = self.name_input.get("1.0","end-1c")
-		self.cognome = self.sur_input.get("1.0","end-1c")
-		self.nascita = self.date_input.get("1.0","end-1c")
+		error = ""
+		self.name = self.name_input.get("1.0","end-1c")
+		self.surname = self.sur_input.get("1.0","end-1c")
+		self.birth = self.date_input.get("1.0","end-1c")
 		self.gender = self.gender_type.get()
-		if self.nome is "":
-			errore += "Name is missing\n"
-		if self.cognome is "":
-			errore += "Surname is missing\n"
-		if self.nascita is "":
-			errore += "Date of birth is missing"
-		self.error_label.config(text = errore)
+		if self.name is "":
+			error += "Name is missing\n"
+		if self.surname is "":
+			error += "Surname is missing\n"
+		if self.birth is "":
+			error += "Date of birth is missing"
+		self.error_label.config(text = error)
 
 
 #Just to debug
-main = Tk()
-start = RegisterAthlete(main)
-main.mainloop()
+#main = Tk()
+#start = RegisterAthlete(main)
+#main.mainloop()
