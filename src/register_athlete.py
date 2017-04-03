@@ -3,8 +3,8 @@ from tkinter import *
 
 class RegisterAthlete(Frame):
 	def __init__(self, parent):
-		Frame.__init__(parent)
-		self.pack()
+		Frame.__init__(self, parent)
+		#Frame.pack()
 		self.name = ""
 		self.surname = ""
 		self.birth = ""
@@ -75,6 +75,7 @@ class RegisterAthlete(Frame):
 
 
 #Just to debug
-#main = Tk()
-#start = RegisterAthlete(main)
-#main.mainloop()
+main = Tk()
+start = RegisterAthlete(main)
+start.pack()
+main.mainloop()
