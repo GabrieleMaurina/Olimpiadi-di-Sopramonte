@@ -4,12 +4,10 @@ from tkinter import *
 class RegisterAthlete(Frame):
 	def __init__(self, parent):
 		Frame.__init__(self, parent)
-		#Frame.pack()
 		self.name = ""
 		self.surname = ""
 		self.birth = ""
 		self.gender = ""
-		
 			#nome
 		self.name_frame = Frame(self)
 		self.name_frame.pack()
@@ -75,7 +73,7 @@ class RegisterAthlete(Frame):
 
 
 #Just to debug
-main = Tk()
-start = RegisterAthlete(main)
-start.pack()
-main.mainloop()
+#main = Tk()
+#start = RegisterAthlete(main)
+#start.pack()
+#main.mainloop()
