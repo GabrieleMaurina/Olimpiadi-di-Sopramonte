@@ -13,7 +13,7 @@ class NavigationBar(Frame):
         self.buttons = {}
         self.current = None
 
-    def addPage(self, PageClass):
+    def add_page(self, PageClass):
         page = PageClass(self.rightFrame)
         self.pages[PageClass] = page
         name = PageClass.__name__
@@ -25,7 +25,7 @@ class NavigationBar(Frame):
         if len(self.pages) == 1:
             self.open(PageClass)
 
-    def removePage(self, PageClass):
+    def remove_page(self, PageClass):
         page = self.pages[PageClass]
         button = self.buttons[PageClass]
         del self.pages[PageClass]
@@ -38,9 +38,9 @@ class NavigationBar(Frame):
 
     def open(self, PageClass):
         self.current = PageClass
-        self.updateUI()
+        self.update_ui()
 
-    def updateUI(self):
+    def update_ui(self):
         for key, value in self.pages.items():
             if key == self.current:
                 value.pack()
