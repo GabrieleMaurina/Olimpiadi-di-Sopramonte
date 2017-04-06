@@ -1,5 +1,5 @@
 from tkinter import *
-from Page import *
+from page import *
 
 class NavigationBar(Frame):
 
@@ -16,7 +16,10 @@ class NavigationBar(Frame):
     def addPage(self, PageClass):
         page = PageClass(self.rightFrame)
         self.pages[PageClass] = page
-        button = Button(self.leftFrame, text=PageClass.name, command=lambda :self.open(PageClass))
+        name = PageClass.__name__
+        if hasattr(PageClass, "name"):
+            name = PageClass.name
+        button = Button(self.leftFrame, text=name, command=lambda :self.open(PageClass))
         self.buttons[PageClass] = button
         button.pack(side=BOTTOM)
         if len(self.pages) == 1:
