@@ -1,6 +1,6 @@
 class Athlete:
-    def __init__(self, id="", name="", surname="", date_of_birth="", gender="", comp_num="", category_id="", team_id=""):
-        self.id = id
+    def __init__(self, athlete_id="", name="", surname="", date_of_birth="", gender="", comp_num="", category_id="", team_id=""):
+        self.athleteId = athlete_id
         self.name = name
         self.surname = surname
         self.dateOfBirth = date_of_birth
@@ -10,4 +10,4 @@ class Athlete:
         self.teamId = team_id
 
     def __str__(self):
-        return "ID=" + str(self.id) + " NAME=" + str(self.name) + " SURNAME=" + str(self.surname) + " DATE_OF_BIRTH=" + str(self.dateOfBirth) + " GENDER=" + str(self.gender) + " COMP_NUM=" + str(self.compNum) + " TEAM_ID=" + str(self.teamId) + " CATEGORY_ID=" + str(self.categoryId)
+        return "Athlete:[athleteId=" + str(self.athleteId) + ", name=" + str(self.name) + ", surname=" + str(self.surname) + ", dateOfBirth=" + str(self.dateOfBirth) + ", gender=" + str(self.gender) + ", compNum=" + str(self.compNum) + ", teamId=" + str(self.teamId) + ", categoryId=" + str(self.categoryId) + "]"
