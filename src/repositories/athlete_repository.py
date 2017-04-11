@@ -31,3 +31,10 @@ class AthleteRepository:
         query = "insert into ATHLETE (NAME, SURNAME, DATE_OF_BIRTH, GENDER, COMP_NUM, TEAM_ID, CATEGORY_ID) values (\"" + athlete.name + "\",\"" + athlete.surname + "\",\"" + athlete.dateOfBirth + "\",\"" + athlete.gender + "\",\"" + str(athlete.compNum) + "\"" + "," + teamId + "," + categoryId +");"
         print(query)
         cursor.execute(query)
+
+    def update(self, athlete):
+        cursor = self.cnx.cursor()
+        query="update ATHLETE set NAME=\"" + athlete.name + "\" where ATHLETE_ID=" + athlete.athleteId + ";"
+        print(query)
+        cursor.execute(query)
+        cnx.commit()
