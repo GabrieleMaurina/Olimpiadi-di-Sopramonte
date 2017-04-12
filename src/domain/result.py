@@ -7,4 +7,4 @@ class Result:
         self.mistakes = mistakes
 
     def __str__(self):
-        return "Result:[resultId=" + self.resultId + ", athleteId=" + self.athleteId + ", competitionId=" + self.competitionId + ", resultValue=" + self.resultValue + ", mistakes=" + self.mistakes + "]"
+        return "Result:[resultId=" + str(self.resultId) + ", athleteId=" + str(self.athleteId) + ", competitionId=" + str(self.competitionId) + ", resultValue=" + str(self.resultValue) + ", mistakes=" + str(self.mistakes) + "]"

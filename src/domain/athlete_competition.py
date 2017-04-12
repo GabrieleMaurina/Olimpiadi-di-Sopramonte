@@ -6,4 +6,4 @@ class AthleteCompetition:
         self.score = score
 
     def __str__(self):
-        return "AthleteCompetition:[athleteId=" + self.athleteId + ", competitionId=" + self.competitionId + ", placement=" + self.placement + ", score=" + self.score + "]"
+        return "AthleteCompetition:[athleteId=" + str(self.athleteId) + ", competitionId=" + str(self.competitionId) + ", placement=" + str(self.placement) + ", score=" + str(self.score) + "]"

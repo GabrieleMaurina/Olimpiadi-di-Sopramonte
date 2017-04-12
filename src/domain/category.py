@@ -6,4 +6,4 @@ class Category:
         self.maxAge = max_age
 
     def __str__(self):
-        return "Category:[categoryId=" + self.categoryId + ", name=" + self.name + ", minAge=" + self.minAge + ", maxAge=" + self.maxAge + "]"
+        return "Category:[categoryId=" + str(self.categoryId) + ", name=" + str(self.name) + ", minAge=" + str(self.minAge) + ", maxAge=" + str(self.maxAge) + "]"

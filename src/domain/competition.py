@@ -5,4 +5,4 @@ class Competition:
         self.resultType = result_type
 
     def __str__(self):
-        return "Competition:[competitionId=" + self.competitionId + ", name=" + self.name + ", resultType=" + self.resultType + "]"
+        return "Competition:[competitionId=" + str(self.competitionId) + ", name=" + str(self.name) + ", resultType=" + str(self.resultType) + "]"

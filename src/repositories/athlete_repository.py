@@ -1,10 +1,11 @@
 from domain.athlete import *
 
+
 class AthleteRepository:
     def __init__(self, cnx):
         self.cnx = cnx
 
-    def getAll(self):
+    def get_all(self):
         cursor = self.cnx.cursor()
         query = "select * from ATHLETE;"
         print(query)
@@ -24,32 +25,64 @@ class AthleteRepository:
 
     def add(self, athlete):
         cursor = self.cnx.cursor()
-        team_id = "\"" + str(athlete.teamId) + "\"" if athlete.teamId != "" else "NULL"
-        category_id = "\"" + str(athlete.categoryId) + "\"" if athlete.categoryId != "" else "NULL"
-        query = "insert into ATHLETE (NAME, SURNAME, DATE_OF_BIRTH, GENDER, COMP_NUM, TEAM_ID, CATEGORY_ID) values (\"" + str(athlete.name) + "\",\"" + str(athlete.surname) + "\",\"" + str(athlete.dateOfBirth) + "\",\"" + str(athlete.gender) + "\",\"" + str(athlete.compNum) + "\"" + "," + team_id + "," + category_id +");"
+        query = "insert into ATHLETE ("
+        fields = []
+        values = []
+        if athlete.name:
+            fields.append("NAME")
+            values.append("\"" + str(athlete.name) + "\"")
+        if athlete.surname:
+            fields.append("SURNAME")
+            values.append("\"" + str(athlete.surname) + "\"")
+        if athlete.dateOfBirth:
+            fields.append("DATE_OF_BIRTH")
+            values.append("\"" + str(athlete.dateOfBirth) + "\"")
+        if athlete.gender:
+            fields.append("GENDER")
+            values.append("\"" + str(athlete.gender) + "\"")
+        if athlete.compNum:
+            fields.append("COMP_NUM")
+            values.append("\"" + str(athlete.compNum) + "\"")
+        if athlete.teamId:
+            fields.append("TEAM_ID")
+            values.append("\"" + str(athlete.teamId) + "\"")
+        if athlete.categoryId:
+            fields.append("CATEGORY_ID")
+            values.append("\"" + str(athlete.categoryId) + "\"")
+
+        query += ", ".join(fields)
+        query += ") values ("
+        query += ", ".join(values)
+        query += ");"
+
         print(query)
+
         cursor.execute(query)
 
     def update(self, athlete):
         cursor = self.cnx.cursor()
-        query = "update ATHLETE set ATHLETE_ID=" + str(athlete.athleteId)
+        query = "update ATHLETE set "
+
+        fields = []
 
         if athlete.name:
-            query += ", NAME=\"" + str(athlete.name) + "\""
+            fields.append("NAME=\"" + str(athlete.name) + "\"")
         if athlete.surname:
-            query += ", SURNAME=\"" + str(athlete.surname) + "\""
+            fields.append("SURNAME=\"" + str(athlete.surname) + "\"")
         if athlete.dateOfBirth:
-            query += ", DATE_OF_BIRTH=\"" + str(athlete.dateOfBirth) + "\""
+            fields.append("DATE_OF_BIRTH=\"" + str(athlete.dateOfBirth) + "\"")
         if athlete.gender:
-            query += ", GENDER=\"" + str(athlete.gender) + "\""
+            fields.append("GENDER=\"" + str(athlete.gender) + "\"")
         if athlete.compNum:
-            query += ", COMP_NUM=" + str(athlete.compNum)
+            fields.append("COMP_NUM=" + str(athlete.compNum))
         if athlete.teamId:
-            query += ", TEAM_ID=" + str(athlete.teamId)
+            fields.append("TEAM_ID=" + str(athlete.teamId))
         if athlete.categoryId:
-            query += ", CATEGORY_ID=" + str(athlete.categoryId)
+            fields.append("CATEGORY_ID=" + str(athlete.categoryId))
 
-        query += "where ATHLETE_ID=" + str(athlete.athleteId) + ";"
+        query += ", ".join(fields)
+
+        query += " where ATHLETE_ID=" + str(athlete.athleteId) + ";"
 
         print(query)
         cursor.execute(query)
