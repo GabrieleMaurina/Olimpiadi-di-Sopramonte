@@ -17,6 +17,7 @@ class RepoManager:
         self.repo = {}
 
         self.cnx = connect(user=RepoManager.user, password=RepoManager.password, database=RepoManager.database, host=RepoManager.host, port=RepoManager.port)
+        self.cnx.autocommit = True
 
         self.add(Athlete, AthleteRepository(self.cnx))
         self.add(Category, CategoryRepository(self.cnx))
