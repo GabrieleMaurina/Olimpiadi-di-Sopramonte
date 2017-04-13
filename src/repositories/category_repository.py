@@ -2,7 +2,7 @@ from domain.category import *
 
 
 class CategoryRepository:
-    def __init__(self,cnx):
+    def __init__(self, cnx):
         self.cnx = cnx
 
     def get(self, category):
@@ -65,9 +65,9 @@ class CategoryRepository:
         if category.name:
             fields.append("NAME=\"" + str(category.name) + "\"")
         if category.minAge:
-            fields.append("MIN_AGE=" + str(category.minAge) + "")
+            fields.append("MIN_AGE=" + str(category.minAge))
         if category.maxAge:
-            fields.append("MAX_AGE=" + str(category.maxAge) + "")
+            fields.append("MAX_AGE=" + str(category.maxAge))
 
         query += ", ".join(fields)
 

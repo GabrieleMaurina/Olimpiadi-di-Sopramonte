@@ -2,21 +2,8 @@ from repositories.repo_manager import *
 
 repo = RepoManager()
 
-'''repo.get(Athlete).add(Athlete(name = "Allison", surname="Tyler"))
-print(repo.get(Athlete).get(Athlete(id = 34)))
-repo.get(Athlete).remove(Athlete(athlete_id=35))
-repo.get(Athlete).update(Athlete(athlete_id = 34, name="Hugo"))
-for athlete in repo.get(Athlete).get(Athlete(name="Allison")):
-    print(athlete)'''
-
-'''repo.get(AthleteCompetition).add(AthleteCompetition(placement=4, score=7))
-repo.get(AthleteCompetition).update(AthleteCompetition(athlete_id=1, category_id=5, placement=4, score=7))
-repo.get(AthleteCompetition).remove(AthleteCompetition(athlete_id=1, category_id=5,))
-for athleteCompetition in repo.get(AthleteCompetition).get(AthleteCompetition(athlete_id=1, category_id=5,)):
-    print(athleteCompetition)'''
-
-'''repo.get(Category).add(Category(name="froci", min_age=52))
-repo.get(Category).update(Category(category_id=5, min_age=11))
-repo.get(Category).remove(Category(category_id=5))
-for category in repo.get(Category).get(Category(name="froci")):
-    print(category)'''
+'''repo.get(Competition).add(Competition(name = "salto in alto"))
+repo.get(Competition).remove(Competition(competition_id=2))
+repo.get(Competition).update(Competition(competition_id=3, name="tiro alla fune"))
+for competition in repo.get(Competition).get(Competition()):
+    print(competition)'''
