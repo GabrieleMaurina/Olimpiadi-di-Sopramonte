@@ -5,23 +5,29 @@ class CategoryRepository:
     def __init__(self,cnx):
         self.cnx = cnx
 
-    def get_all(self):
+    def get(self, category):
         cursor = self.cnx.cursor()
-        query = "select * from CATEGORY;"
+        query = "select * from CATEGORY"
+
+        fields = []
+        if category.categoryId:
+            fields.append("CATEGORY_ID=" + str(category.categoryId))
+        if category.name:
+            fields.append("NAME=\"" + str(category.name) + "\"")
+        if category.minAge:
+            fields.append("MIN_AGE=" + str(category.minAge))
+        if category.maxAge:
+            fields.append("MAX_AGE=" + str(category.maxAge))
+
+        if len(fields) > 0:
+            query += " where "
+        query += " and ".join(fields) + ";"
         print(query)
         cursor.execute(query)
         result = []
         for (id, name, minAge, maxAge) in cursor:
             result.append(Category(id, name, minAge, maxAge))
         return result
-
-    def get(self, category):
-        cursor = self.cnx.cursor()
-        query = "select * from CATEGORY where CATEGORY_ID = " + category.id
-        print(query)
-        cursor.execute(query)
-        for (id, name, minAge, maxAge) in cursor:
-            return Category(id, name, minAge, maxAge)
 
     def add(self, category):
         cursor = self.cnx.cursor()
@@ -33,10 +39,10 @@ class CategoryRepository:
             values.append("\"" + str(category.name) + "\"")
         if category.minAge:
             fields.append("MIN_AGE")
-            values.append("\"" + str(category.minAge) + "\"")
+            values.append(str(category.minAge))
         if category.maxAge:
             fields.append("MAX_AGE")
-            values.append("\"" + str(category.maxAge) + "\"")
+            values.append(str(category.maxAge))
 
         query += ", ".join(fields)
         query += ") values ("
@@ -56,9 +62,9 @@ class CategoryRepository:
         if category.name:
             fields.append("NAME=\"" + str(category.name) + "\"")
         if category.minAge:
-            fields.append("MIN_AGE=\"" + str(category.minAge) + "\"")
+            fields.append("MIN_AGE=" + str(category.minAge) + "")
         if category.maxAge:
-            fields.append("MAX_AGE=\"" + str(category.maxAge) + "\"")
+            fields.append("MAX_AGE=" + str(category.maxAge) + "")
 
         query += ", ".join(fields)
 

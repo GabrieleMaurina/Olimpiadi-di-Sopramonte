@@ -5,23 +5,38 @@ class AthleteRepository:
     def __init__(self, cnx):
         self.cnx = cnx
 
-    def get_all(self):
+    def get(self, athlete):
         cursor = self.cnx.cursor()
-        query = "select * from ATHLETE;"
+        query = "select * from ATHLETE"
+
+        fields = []
+        if athlete.athleteId:
+            fields.append("ATHLETE_ID=" + str(athlete.athleteId))
+        if athlete.name:
+            fields.append("NAME=\"" + str(athlete.name) + "\"")
+        if athlete.surname:
+            fields.append("SURNAME=\"" + str(athlete.surname) + "\"")
+        if athlete.dateOfBirth:
+            fields.append("DATE_OF_BIRTH=\"" + str(athlete.dateOfBirth) + "\"")
+        if athlete.gender:
+            fields.append("GENDER=\"" + str(athlete.gender) + "\"")
+        if athlete.compNum:
+            fields.append("COMP_NUM=" + str(athlete.compNum))
+        if athlete.teamId:
+            fields.append("TEAM_ID=" + str(athlete.teamId))
+        if athlete.categoryId:
+            fields.append("CATEGORY_ID=" + str(athlete.categoryId))
+
+        if len(fields) > 0:
+            query += " where "
+        query += " and ".join(fields) + ";"
         print(query)
         cursor.execute(query)
+
         result = []
         for (id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId) in cursor:
             result.append(Athlete(id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId))
         return result
-
-    def get(self, athlete):
-        cursor = self.cnx.cursor()
-        query = "select * from ATHLETE where ATHLETE_ID = " + str(athlete.id) + ";"
-        print(query)
-        cursor.execute(query)
-        for (id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId) in cursor:
-            return Athlete(id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId)
 
     def add(self, athlete):
         cursor = self.cnx.cursor()
