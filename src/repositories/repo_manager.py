@@ -1,8 +1,10 @@
 from mysql.connector import *
 
 from domain.athlete import *
+from domain.athlete_competition import *
 from domain.category import *
 from repositories.athlete_repository import *
+from repositories.athlete_competition_repository import *
 from repositories.category_repository import *
 
 class RepoManager:
@@ -20,6 +22,7 @@ class RepoManager:
         self.cnx.autocommit = True
 
         self.add(Athlete, AthleteRepository(self.cnx))
+        self.add(AthleteCompetition, AthleteCompetitionRepository(self.cnx))
         self.add(Category, CategoryRepository(self.cnx))
 
     def __del__(self):

@@ -34,8 +34,8 @@ class AthleteRepository:
         cursor.execute(query)
 
         result = []
-        for (id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId) in cursor:
-            result.append(Athlete(id, name, surname, dateOfBirth, gender, compNum, teamId, categoryId))
+        for (athleteId, name, surname, dateOfBirth, gender, compNum, teamId, categoryId) in cursor:
+            result.append(Athlete(athleteId, name, surname, dateOfBirth, gender, compNum, teamId, categoryId))
         return result
 
     def add(self, athlete):
@@ -43,6 +43,9 @@ class AthleteRepository:
         query = "insert into ATHLETE ("
         fields = []
         values = []
+        if athlete.athleteId:
+            fields.append("ATHLETE_ID")
+            values.append(str(athlete.athleteId))
         if athlete.name:
             fields.append("NAME")
             values.append("\"" + str(athlete.name) + "\"")

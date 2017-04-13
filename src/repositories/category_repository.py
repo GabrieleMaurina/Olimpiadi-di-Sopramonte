@@ -25,8 +25,8 @@ class CategoryRepository:
         print(query)
         cursor.execute(query)
         result = []
-        for (id, name, minAge, maxAge) in cursor:
-            result.append(Category(id, name, minAge, maxAge))
+        for (categoryId, name, minAge, maxAge) in cursor:
+            result.append(Category(categoryId, name, minAge, maxAge))
         return result
 
     def add(self, category):
@@ -34,6 +34,9 @@ class CategoryRepository:
         query = "insert into CATEGORY ("
         fields = []
         values = []
+        if category.categoryId:
+            fields.append("CATEGORY_ID")
+            values.append(str(category.categoryId))
         if category.name:
             fields.append("NAME")
             values.append("\"" + str(category.name) + "\"")

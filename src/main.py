@@ -9,6 +9,12 @@ repo.get(Athlete).update(Athlete(athlete_id = 34, name="Hugo"))
 for athlete in repo.get(Athlete).get(Athlete(name="Allison")):
     print(athlete)'''
 
+'''repo.get(AthleteCompetition).add(AthleteCompetition(placement=4, score=7))
+repo.get(AthleteCompetition).update(AthleteCompetition(athlete_id=1, category_id=5, placement=4, score=7))
+repo.get(AthleteCompetition).remove(AthleteCompetition(athlete_id=1, category_id=5,))
+for athleteCompetition in repo.get(AthleteCompetition).get(AthleteCompetition(athlete_id=1, category_id=5,)):
+    print(athleteCompetition)'''
+
 '''repo.get(Category).add(Category(name="froci", min_age=52))
 repo.get(Category).update(Category(category_id=5, min_age=11))
 repo.get(Category).remove(Category(category_id=5))
