@@ -1,6 +1,11 @@
 from repositories.repo_manager import *
+from navigation_bars.my_navigation_bar import *
 
-repo = RepoManager()
+from tkinter import *
 
-for competition in repo.competitionRepository.get(Competition()):
-    print(competition)
+root = Tk()
+root.geometry("500x500")
+
+bar = MyNavigationBar(root)
+
+root.mainloop()
