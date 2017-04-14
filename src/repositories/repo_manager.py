@@ -23,20 +23,10 @@ class RepoManager:
         self.cnx = connect(user=RepoManager.user, password=RepoManager.password, database=RepoManager.database, host=RepoManager.host, port=RepoManager.port)
         self.cnx.autocommit = True
 
-        self.add(Athlete, AthleteRepository(self.cnx))
-        self.add(AthleteCompetition, AthleteCompetitionRepository(self.cnx))
-        self.add(Category, CategoryRepository(self.cnx))
-        self.add(Competition, CompetitionRepository(self.cnx))
+        self.athleteRepository = AthleteRepository(self.cnx)
+        self.athleteCompetitionRepository = AthleteCompetitionRepository(self.cnx)
+        self.categoryRepository = CategoryRepository(self.cnx)
+        self.competitionRepository = CompetitionRepository(self.cnx)
 
     def __del__(self):
-        self.cnx.commit()
         self.cnx.close()
-
-    def get(self, table):
-        return self.repo[table]
-
-    def add(self, table, repo):
-        self.repo[table] = repo
-
-    def remove(self, table):
-        del self.repo[table]
