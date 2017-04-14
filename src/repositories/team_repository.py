@@ -43,10 +43,10 @@ class TeamRepository:
             values.append(str(team.teamId))
         if team.name:
             fields.append("NAME")
-            values.append(str(team.name))
+            values.append("\"" + str(team.name) + "\"")
         if team.color:
             fields.append("COLOR")
-            values.append(str(team.color))
+            values.append("\"" + str(team.color) + "\"")
         if team.compNumMin:
             fields.append("COMP_NUM_MIN")
             values.append(str(team.compNumMin))
