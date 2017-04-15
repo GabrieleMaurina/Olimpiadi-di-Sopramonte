@@ -1,3 +1,4 @@
+from pages.header_page import *
 from tkinter import *
 
 class NavigationBar(Frame):
@@ -22,7 +23,11 @@ class NavigationBar(Frame):
         name = page.__class__.__name__
         if hasattr(page, "name"):
             name = page.name
-        button = Button(self.leftFrame, text=name, command=lambda:self.open(page))
+
+        color = "black"
+        if issubclass(type(page), HeaderPage):
+            color = "red"
+        button = Button(self.leftFrame, text=name, command=lambda:self.open(page), fg=color)
         self.buttons.append(button)
         button.pack(fill=X)
         if len(self.pages) == 1:

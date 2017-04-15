@@ -1,5 +1,4 @@
 from navigation_bars.navigation_bar import *
-from pages.page import *
 from pages.header_page import *
 
 
