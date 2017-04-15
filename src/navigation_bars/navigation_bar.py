@@ -3,12 +3,12 @@ from tkinter import *
 class NavigationBar(Frame):
 
     def __init__(self, parent):
-        super().__init__(parent, bg = 'black')
+        super().__init__(parent)
 
         self.pack(fill=BOTH, expand=True)
 
-        self.leftFrame = Frame(self, width = 100, bg = 'pink')
-        self.rightFrame = Frame(self, bg = 'yellow')
+        self.leftFrame = Frame(self, width = 100)
+        self.rightFrame = Frame(self)
 
         self.leftFrame.pack(side=LEFT, fill=Y)
         self.rightFrame.pack(side=RIGHT, fill=BOTH, expand=True)
@@ -22,7 +22,7 @@ class NavigationBar(Frame):
         name = page.__class__.__name__
         if hasattr(page, "name"):
             name = page.name
-        button = Button(self.leftFrame, text=name, height = 1, width = 10, command=lambda : self.open(page))
+        button = Button(self.leftFrame, text=name, command=lambda:self.open(page))
         self.buttons.append(button)
         button.pack(fill=X)
         if len(self.pages) == 1:
