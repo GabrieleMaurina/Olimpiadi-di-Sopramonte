@@ -18,6 +18,30 @@ class NavigationBar(Frame):
         self.buttons = []
         self.current = -1
 
+        self.bind_all("<MouseWheel>", self.handle_mouse_wheel)
+        for i in range(10):
+            self.bind_all(str(i), self.handle_numbers)
+
+    def handle_numbers(self, event):
+        number = int(event.char)
+        number -= 1
+        if number < 0:
+            number = 9
+        if number < len(self.pages):
+            self.current = number
+            self.update_ui()
+
+    def handle_mouse_wheel(self, event):
+        if event.delta > 0:
+            self.current += 1
+            self.current %= len(self.pages)
+            self.update_ui()
+        if event.delta < 0:
+            self.current -= 1
+            if self.current < 0:
+                self.current += len(self.pages)
+            self.update_ui()
+
     def add_page(self, page):
         self.pages.append(page)
         name = page.__class__.__name__
