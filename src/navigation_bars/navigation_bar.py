@@ -11,8 +11,10 @@ class NavigationBar(Frame):
         self.leftFrame = Frame(self, width = 150, relief=RIDGE, borderwidth=2)
         self.rightFrame = Frame(self, relief=RIDGE, borderwidth=2)
 
-        self.leftFrame.pack(side=LEFT, fill=Y)
-        self.rightFrame.pack(side=RIGHT, fill=BOTH, expand=True)
+        self.leftFrame.pack_propagate(False)
+
+        self.leftFrame.pack(side=LEFT, anchor=NW, fill=Y, padx=(10, 5), pady=(0, 10))
+        self.rightFrame.pack(side=RIGHT,anchor=NE, fill=BOTH, expand=True, padx=(5, 10), pady=(0, 10))
 
         self.pages = []
         self.buttons = []
@@ -49,11 +51,13 @@ class NavigationBar(Frame):
             name = page.name
 
         font = (None, 10)
+        padx = (20, 0)
         if issubclass(type(page), HeaderPage):
             font = (None, 12, "bold")
+            padx = (0, 0)
         button = Button(self.leftFrame, text=name, command=lambda:self.open(page), font=font)
         self.buttons.append(button)
-        button.pack(fill=X)
+        button.pack(side=TOP, fill=X, padx=padx)
         if len(self.pages) == 1:
             self.open(page)
         return page

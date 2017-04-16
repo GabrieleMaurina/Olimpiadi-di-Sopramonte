@@ -73,7 +73,9 @@ class RegisterAthlete(Frame):
 
 
 #Just to debug
-#main = Tk()
-#start = RegisterAthlete(main)
-#start.pack()
-#main.mainloop()
+'''
+main = Tk()
+start = RegisterAthlete(main)
+start.pack()
+main.mainloop()
+'''
