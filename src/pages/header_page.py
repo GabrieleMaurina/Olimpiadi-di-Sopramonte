@@ -6,5 +6,5 @@ class HeaderPage(Page):
         super().__init__(parent, name)
 
     def add(self, name="EmptyPage", open_lambda=None):
-        button = Button(self, text=name, height = 1, width = 10, command=open_lambda)
+        button = Button(self, text=name, height = 1, width = 10, command=open_lambda, font=(None, 10))
         button.pack(side=TOP)

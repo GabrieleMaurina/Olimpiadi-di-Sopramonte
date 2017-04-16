@@ -8,8 +8,8 @@ class NavigationBar(Frame):
 
         self.pack(fill=BOTH, expand=True)
 
-        self.leftFrame = Frame(self, width = 100)
-        self.rightFrame = Frame(self)
+        self.leftFrame = Frame(self, width = 150, relief=RIDGE, borderwidth=2)
+        self.rightFrame = Frame(self, relief=RIDGE, borderwidth=2)
 
         self.leftFrame.pack(side=LEFT, fill=Y)
         self.rightFrame.pack(side=RIGHT, fill=BOTH, expand=True)
@@ -48,10 +48,10 @@ class NavigationBar(Frame):
         if hasattr(page, "name"):
             name = page.name
 
-        color = "black"
+        font = (None, 10)
         if issubclass(type(page), HeaderPage):
-            color = "red"
-        button = Button(self.leftFrame, text=name, command=lambda:self.open(page), fg=color)
+            font = (None, 12, "bold")
+        button = Button(self.leftFrame, text=name, command=lambda:self.open(page), font=font)
         self.buttons.append(button)
         button.pack(fill=X)
         if len(self.pages) == 1:
@@ -71,6 +71,6 @@ class NavigationBar(Frame):
                 page.pack_forget()
         for index, button in enumerate(self.buttons):
             if index == self.current:
-                button.configure(bg='green')
+                button.configure(bg='gray')
             else:
                 button.configure(bg='white')

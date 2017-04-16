@@ -1,5 +1,6 @@
-from navigation_bars.my_navigation_bar import *
 from tkinter import *
+
+from navigation_bars.my_navigation_bar import *
 
 
 class OlimpiadiDiSopramonte:
@@ -11,7 +12,7 @@ class OlimpiadiDiSopramonte:
         root.geometry("500x500")
         root.title(OlimpiadiDiSopramonte.title)
 
-        title = Label(root, text=OlimpiadiDiSopramonte.title, font=(None, 20))
+        title = Label(root, text=OlimpiadiDiSopramonte.title, font=(None, 20), height=2)
 
         title.pack(side=TOP)
 
