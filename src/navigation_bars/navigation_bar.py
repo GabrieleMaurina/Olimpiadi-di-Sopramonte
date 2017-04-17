@@ -75,6 +75,6 @@ class NavigationBar(Frame):
                 page.pack_forget()
         for index, button in enumerate(self.buttons):
             if index == self.current:
-                button.configure(bg='gray')
+                button.configure(bg="gray")
             else:
-                button.configure(bg='white')
+                button.configure(bg="SystemButtonFace")
