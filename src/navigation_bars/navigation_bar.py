@@ -8,7 +8,7 @@ class NavigationBar(Frame):
 
         self.pack(fill=BOTH, expand=True)
 
-        self.leftFrame = Frame(self, width = 150, relief=RIDGE, borderwidth=2)
+        self.leftFrame = Frame(self, width = 160, relief=RIDGE, borderwidth=2)
         self.rightFrame = Frame(self, relief=RIDGE, borderwidth=2)
 
         self.leftFrame.pack_propagate(False)

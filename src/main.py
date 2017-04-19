@@ -1,4 +1,4 @@
-from gui.olimpiadi_di_sopramonte import *
+from gui.olympics import *
 
 
-OlimpiadiDiSopramonte()
+Olympics()
