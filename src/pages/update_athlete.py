@@ -2,12 +2,16 @@ from pages.page import *
 from domain.athlete import *
 from domain.category import *
 from domain.team import *
+from tkinter.messagebox import *
+from datetime import *
 
 class UpdateAthlete(Page):
     def __init__(self, parent, repo_manager):
         super().__init__(parent, name="Modifica Atleti")
 
         self.repoManager = repo_manager
+        self.categories = self.repoManager.categoryRepository.get(Category())
+        self.teams = self.repoManager.teamRepository.get(Team())
 
         self.findLabel = Label(self, text="Trova Atleta", font=(None, 10))
         self.findLabel.pack(anchor=NW)
@@ -90,13 +94,11 @@ class UpdateAthlete(Page):
         self.updateInputCompNum = Entry(self.updateFrame, font=(None, 10), width=10)
         self.updateInputCompNum.grid(row=1, column=1, padx=(0, 10), sticky=W)
 
-        self.categories = [category for category in self.repoManager.categoryRepository.get(Category())]
         self.updateCategory = Label(self.updateFrame, text="Categoria", font=(None, 10))
         self.updateCategory.grid(row=1, column=2, sticky=W)
         self.updateInputCategory = ttk.Combobox(self.updateFrame, font=(None, 10), width=10, values=[category.name for category in self.categories])
         self.updateInputCategory.grid(row=1, column=3, padx=(0, 10), sticky=W)
 
-        self.teams = [team for team in self.repoManager.teamRepository.get(Team())]
         self.updateTeam = Label(self.updateFrame, text="Squadra", font=(None, 10))
         self.updateTeam.grid(row=1, column=4, sticky=W)
         self.updateInputTeam = ttk.Combobox(self.updateFrame, font=(None, 10), width=10, values=[team.name for team in self.teams])
@@ -112,7 +114,32 @@ class UpdateAthlete(Page):
         self.athletes = self.repoManager.athleteRepository.get(Athlete(name=self.findInputName.get(), surname=self.findInputSurname.get(), comp_num=self.findInputCompNum.get()))
         self.listListbox.delete(0, END)
         for athlete in self.athletes:
-            self.listListbox.insert(END, athlete)
+            line = []
+            if athlete.name:
+                line.append(str(athlete.name))
+            if athlete.surname:
+                line.append(str(athlete.surname))
+            if athlete.dateOfBirth:
+                line.append(datetime.strptime(str(athlete.dateOfBirth), "%Y-%m-%d").strftime("%d/%m/%Y"))
+            if athlete.gender:
+                line.append("M" if str(athlete.gender) == "MALE" else "F")
+            if athlete.compNum:
+                line.append(str(athlete.compNum))
+
+            category = [category.name for category in self.categories if athlete.categoryId == category.categoryId]
+            team = [team.name for team in self.teams if athlete.teamId == team.teamId]
+
+            category = category[0] if len(category) else None
+            team = team[0] if len(team) else None
+
+            if category:
+                line.append(str(category))
+            if team:
+                line.append(str(team))
+
+            a = "  ".join(line)
+
+            self.listListbox.insert(END, a)
 
     def update_update(self, event=None):
         self.updateInputName.delete(0, END)
@@ -131,31 +158,50 @@ class UpdateAthlete(Page):
             date_of_birth = str(self.athletes[self.selectedAthlete].dateOfBirth)
             gender = self.athletes[self.selectedAthlete].gender
             comp_num = str(self.athletes[self.selectedAthlete].compNum)
-            category_id = [category.name for category in self.categories if self.athletes[self.selectedAthlete].categoryId == category.categoryId]
-            team_id = [team.name for team in self.teams if self.athletes[self.selectedAthlete].teamId == team.teamId]
+            category = [category.name for category in self.categories if self.athletes[self.selectedAthlete].categoryId == category.categoryId]
+            team = [team.name for team in self.teams if self.athletes[self.selectedAthlete].teamId == team.teamId]
+
+            category = category[0] if len(category) else None
+            team = team[0] if len(team) else None
 
             if name != "None":
                 self.updateInputName.insert(0, name)
             if surname != "None":
                 self.updateInputSurname.insert(0, surname)
             if date_of_birth != "None":
-                self.updateInputDateOfBirth.insert(0, date_of_birth)
+                self.updateInputDateOfBirth.insert(0, datetime.strptime(date_of_birth, "%Y-%m-%d").strftime("%d/%m/%Y"))
             if gender != "None":
-                self.updateInputGender.insert(0, gender)
+                self.updateInputGender.insert(0, "M" if gender == "MALE" else "F")
             if comp_num != "None":
                 self.updateInputCompNum.insert(0, comp_num)
-            if len(category_id):
-                self.updateInputCategory.set(category_id[0])
-            if len(team_id):
-                self.updateInputTeam.set(team_id[0])
+            if category:
+                self.updateInputCategory.set(category)
+            if team:
+                self.updateInputTeam.set(team)
 
     def save(self):
         if self.selectedAthlete > -1:
+
+            gender = self.updateInputGender.get()
+            if gender:
+                if gender[0].lower() == "m":
+                    gender = "MALE"
+                elif gender[0].lower() == "f":
+                    gender = "FEMALE"
+                else:
+                    gender=None
+
+            date_of_birth = ""
+            try:
+                date_of_birth = datetime.strptime(self.updateInputDateOfBirth.get(), "%d/%m/%Y").strftime("%Y-%m-%d")
+            except:
+                pass
+
             athlete = Athlete(athlete_id=self.athletes[self.selectedAthlete].athleteId,
                               name=self.updateInputName.get(),
                               surname=self.updateInputSurname.get(),
-                              date_of_birth=self.updateInputDateOfBirth.get(),
-                              gender=self.updateInputGender.get(),
+                              date_of_birth=date_of_birth,
+                              gender=gender,
                               comp_num=self.updateInputCompNum.get(),
                               category_id=self.categories[self.updateInputCategory.current()].categoryId,
                               team_id=self.teams[self.updateInputTeam.current()].teamId)
@@ -165,6 +211,9 @@ class UpdateAthlete(Page):
 
     def delete(self):
         if self.selectedAthlete > -1:
-            athlete = Athlete(athlete_id=self.athletes[self.selectedAthlete].athleteId)
-            self.repoManager.athleteRepository.remove(athlete)
-            self.update_list()
+            answer = askquestion("Cancella", "Sei sicuro di volerlo cancellare?", icon='warning')
+            if answer == 'yes':
+                athlete = Athlete(athlete_id=self.athletes[self.selectedAthlete].athleteId)
+                self.repoManager.athleteRepository.remove(athlete)
+                self.update_list()
+                self.update_update()

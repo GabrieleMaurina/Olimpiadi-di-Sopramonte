@@ -10,11 +10,10 @@ class Olympics:
 
     def __init__(self):
 
-        self.width = 1000
+        self.width = 900
         self.height = 600
 
         self.root = Tk()
-        self.root.geometry("1000x600")
         self.root.title(Olympics.title)
 
         self.frame = Frame(self.root, relief=RIDGE, borderwidth=2)

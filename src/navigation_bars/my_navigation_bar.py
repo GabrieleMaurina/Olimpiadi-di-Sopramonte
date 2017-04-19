@@ -16,8 +16,8 @@ class MyNavigationBar(NavigationBar):
     def init_acquisition(self):
         acquisition_header = HeaderPage(self.rightFrame, name="Acquisizione Dati")
         update_athlete_page = UpdateAthlete(self.rightFrame, self.repoManager)
-        register_result = Page(self.rightFrame, name="Registra risultati")
-        register_relay = Page(self.rightFrame, name="Registra staffetta")
+        register_result = Page(self.rightFrame, name="Registra Risultati")
+        register_relay = Page(self.rightFrame, name="Registra Staffetta")
 
         acquisition_header.add(update_athlete_page.name, lambda:self.open(update_athlete_page))
         acquisition_header.add(register_result.name, lambda:self.open(register_result))
@@ -34,7 +34,7 @@ class MyNavigationBar(NavigationBar):
 
     def init_administration(self):
         administration_header = HeaderPage(self.rightFrame, name="Amministrazione")
-        team_creation_page = Page(self.rightFrame, name="Creazione squadre")
+        team_creation_page = Page(self.rightFrame, name="Creazione Squadre")
         reset_db_page = Page(self.rightFrame, name="Reset Database")
 
         administration_header.add(team_creation_page.name, lambda:self.open(team_creation_page))
