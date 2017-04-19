@@ -1,5 +1,5 @@
 class Athlete:
-    def __init__(self, athlete_id="", name="", surname="", date_of_birth="", gender="", comp_num="", category_id="", team_id=""):
+    def __init__(self, athlete_id="", name="", surname="", date_of_birth="", gender="", comp_num="", team_id="", category_id=""):
         self.athleteId = athlete_id
         self.name = name
         self.surname = surname

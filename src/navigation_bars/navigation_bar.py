@@ -21,8 +21,6 @@ class NavigationBar(Frame):
         self.current = -1
 
         self.bind_all("<MouseWheel>", self.handle_mouse_wheel)
-        for i in range(10):
-            self.bind_all(str(i), self.handle_numbers)
 
     def handle_numbers(self, event):
         number = int(event.char)

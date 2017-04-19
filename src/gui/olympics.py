@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.ttk as ttk
 from repositories.repo_manager import *
 from navigation_bars.my_navigation_bar import *
 
