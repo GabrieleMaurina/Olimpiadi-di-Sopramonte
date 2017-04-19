@@ -70,7 +70,7 @@ class NavigationBar(Frame):
     def update_ui(self):
         for index, page in enumerate(self.pages):
             if index == self.current:
-                page.pack(side=TOP, fill=BOTH, expand=True)
+                page.pack(side=TOP, fill=BOTH, expand=True, padx = (10, 10), pady = (10, 10))
             else:
                 page.pack_forget()
         for index, button in enumerate(self.buttons):
