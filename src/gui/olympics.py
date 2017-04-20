@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter.ttk as ttk
 from repositories.repo_manager import *
 from navigation_bars.my_navigation_bar import *
+from gui.utilities import *
 
 
 class Olympics:
@@ -26,12 +27,6 @@ class Olympics:
 
         self.navigationBar = MyNavigationBar(self.root, self.repoManager)
 
-        self.center()
+        center(self.root, self.width, self.height)
 
         self.root.mainloop()
-
-    def center(self):
-        self.root.update_idletasks()
-        x = (self.root.winfo_screenwidth() // 2) - (self.width // 2)
-        y = (self.root.winfo_screenheight() // 2) - (self.height // 2) - 100
-        self.root.geometry('{}x{}+{}+{}'.format(self.width, self.height, x, y))

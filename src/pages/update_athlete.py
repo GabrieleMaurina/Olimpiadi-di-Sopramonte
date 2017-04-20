@@ -2,8 +2,8 @@ from pages.page import *
 from domain.athlete import *
 from domain.category import *
 from domain.team import *
-from tkinter.messagebox import *
 from datetime import *
+from gui.utilities import *
 
 class UpdateAthlete(Page):
     def __init__(self, parent, repo_manager):
@@ -209,11 +209,13 @@ class UpdateAthlete(Page):
             self.repoManager.athleteRepository.update(athlete)
             self.update_list()
 
+    def handle_answer(self, answer):
+        if answer:
+            athlete = Athlete(athlete_id=self.athletes[self.selectedAthlete].athleteId)
+            self.repoManager.athleteRepository.remove(athlete)
+            self.update_list()
+            self.update_update()
+
     def delete(self):
         if self.selectedAthlete > -1:
-            answer = askquestion("Cancella", "Sei sicuro di volerlo cancellare?", icon='warning')
-            if answer == 'yes':
-                athlete = Athlete(athlete_id=self.athletes[self.selectedAthlete].athleteId)
-                self.repoManager.athleteRepository.remove(athlete)
-                self.update_list()
-                self.update_update()
+            ask_question("Attenzione", "Sei sicuro di volerlo cancellare?", "Si", "No", 230, 110, self.handle_answer)
